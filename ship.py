@@ -9,7 +9,7 @@ class Ship():
 
         #loadind a ship
         self.image = pygame.image.load("images/ship.bmp")
-        self.image = pygame.transform.scale(self.image, (35,35))
+        self.image = pygame.transform.scale(self.image, (game_settings.ship_width,game_settings.ship_height))
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -29,7 +29,7 @@ class Ship():
         #calculating ship.center
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.game_settings.ship_speed_factor
-        if self.moving_left and self.rect.left > 0 :
+        if self.moving_left and self.rect.left > 0:
             self.center -= self.game_settings.ship_speed_factor
 
         #updating self.rect according to self.center
