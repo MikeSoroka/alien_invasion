@@ -1,15 +1,15 @@
 import pygame
 
 class Ship():
-
+    """class, which performs a ship"""
     def __init__(self, game_settings, screen):
         """initializing a ship and picking a starting position"""
         self.screen = screen
         self.game_settings = game_settings
 
         #loadind a ship
-        self.image = pygame.image.load("images/ship.bmp")
-        self.image = pygame.transform.scale(self.image, (game_settings.ship_width,game_settings.ship_height))
+        ship_img = pygame.image.load("images/ship.bmp")
+        self.image = pygame.transform.scale(ship_img, (game_settings.ship_width,game_settings.ship_height))
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 

@@ -13,6 +13,11 @@ class Settings():
         self.ship_width = 35
         self.ship_height= 35
 
+        #alien ship settings
+        self.alien_speed_factor = 1.5
+        self.alien_width = 40
+        self.alien_height = 35
+
         #bullet settings
         self.bullet_speed_factor = 1
         self.bullet_width = 3

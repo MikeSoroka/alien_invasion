@@ -1,5 +1,6 @@
 import sys
 import pygame
+from alien import Alien
 from bullet import Bullet
 
 
@@ -11,6 +12,23 @@ def check_keydown_events(event, game_settings, screen, ship, bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(game_settings, screen, ship, bullets)
+    elif event.key == pygame.K_q:
+        sys.exit()
+
+def create_fleet(game_settings, screen, aliens):
+    """creating an aliens fleet."""
+    # neighbouring aliens interval is equal to single alien width
+
+    available_space_x = game_settings.screen_width - 2 * game_settings.alien_width
+    aliens_number_x = int(available_space_x / (2 * game_settings.alien_width))
+
+    #creating first alien row
+    for alien_number in range(aliens_number_x):
+        alien = Alien(game_settings, screen)
+        alien.x = game_settings.alien_width * (2 * alien_number + 1)
+        alien.rect.x = alien.x
+        alien.rect.y = game_settings.alien_height
+        aliens.add(alien)
 
 
 def check_keyup_events(event, ship):
@@ -38,13 +56,15 @@ def fire_bullet(game_settings, screen, ship, bullets):
         new_bullet = Bullet(game_settings, screen, ship)
         bullets.add(new_bullet)
 
-def update_screen(game_settings, screen, ship, bullets):
+def update_screen(game_settings, screen, ship, aliens, bullets):
     screen.fill(game_settings.bg_color)
-    #all bullets are drawed behind ship and aliens
+    # all bullets are drawed behind ship and aliens
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
-    #last frame visualisation
+    for  alien in aliens:
+        alien.blitme()
+    # last frame visualisation
     pygame.display.flip()
 
 def update_bullets(bullets):
