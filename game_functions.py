@@ -15,20 +15,24 @@ def check_keydown_events(event, game_settings, screen, ship, bullets):
     elif event.key == pygame.K_q:
         sys.exit()
 
+def aliens_per_row(game_settings):
+    available_space_x = game_settings.screen_width - 2 * game_settings.alien_width
+    aliens_amount = int(available_space_x / (2 * game_settings.alien_width))
+    return aliens_amount
+
+def create_alien(game_settings, screen, aliens, alien_number):
+    alien = Alien(game_settings, screen)
+    alien.x = game_settings.alien_width * (2 * alien_number + 1)
+    alien.rect.x = alien.x
+    alien.rect.y = game_settings.alien_height
+    aliens.add(alien)
+
 def create_fleet(game_settings, screen, aliens):
     """creating an aliens fleet."""
     # neighbouring aliens interval is equal to single alien width
-
-    available_space_x = game_settings.screen_width - 2 * game_settings.alien_width
-    aliens_number_x = int(available_space_x / (2 * game_settings.alien_width))
-
     #creating first alien row
-    for alien_number in range(aliens_number_x):
-        alien = Alien(game_settings, screen)
-        alien.x = game_settings.alien_width * (2 * alien_number + 1)
-        alien.rect.x = alien.x
-        alien.rect.y = game_settings.alien_height
-        aliens.add(alien)
+    for alien_number in range(aliens_per_row(game_settings)):
+        create_alien(game_settings, screen, aliens, alien_number)
 
 
 def check_keyup_events(event, ship):
