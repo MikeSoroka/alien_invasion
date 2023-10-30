@@ -95,7 +95,7 @@ def update_fleet(game_settings, screen, aliens):
         current_direction = -1
 
     if current_direction == 1:
-        if int(last.right + game_settings.alien_speed_factor <= screen.rect.right):
+        if int(last.rect.right + game_settings.alien_speed_factor <= screen.get_rect().right):
             aliens.update()
         else:
             for alien in aliens:
