@@ -72,6 +72,7 @@ def update_screen(game_settings, screen, ship, aliens, bullets):
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
+    update_fleet(game_settings, screen, aliens)
     for  alien in aliens:
         alien.blitme()
     # last frame visualisation
@@ -88,27 +89,23 @@ def update_bullets(bullets):
             bullets.remove(bullet)
 
 def update_fleet(game_settings, screen, aliens):
-    last = aliens.sprites()[-1]
-    if last.moving_right:
+    last_alien = aliens.sprites()[-1]
+    if last_alien.moving_right:
         current_direction = 1
     else:
         current_direction = -1
 
     if current_direction == 1:
-        if int(last.rect.right + game_settings.alien_speed_factor <= screen.get_rect().right):
+        if int(last_alien.rect.right + game_settings.alien_x_speed_factor <= screen.get_rect().right):
             aliens.update()
         else:
             for alien in aliens:
-                alien.moving_right = False
-                alien.y -= game_settings.alien_speed_factor
-                alien.rect.y = alien.y
+                alien.move_down()
 
     else:
-        first = aliens.sprites()[0]
-        if int(first.rect.left - game_settings.alien_speed_factor >= 0):
+        first_alien = aliens.sprites()[0]
+        if int(first_alien.rect.left - game_settings.alien_x_speed_factor >= 0):
             aliens.update()
         else:
             for alien in aliens:
-                alien.moving_right = True
-                alien.y -= game_settings.alien_speed_factor
-                alien.rect.y = alien.y
+                alien.move_down()

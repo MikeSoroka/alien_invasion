@@ -34,6 +34,7 @@ class Ship():
 
         #updating self.rect according to self.center
         self.rect.centerx = self.center
+
     def blitme(self):
         """Drawing ship in current position"""
         self.screen.blit(self.image, self.rect)

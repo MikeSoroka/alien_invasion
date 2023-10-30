@@ -32,11 +32,13 @@ class Alien(Sprite):
 
     def update(self):
         if self.moving_right:
-            self.x += self.game_settings.alien_speed_factor
+            self.x += self.game_settings.alien_x_speed_factor
             self.rect.x = self.x
         else:
-            self.x -= self.game_settings.alien_speed_factor
+            self.x -= self.game_settings.alien_x_speed_factor
             self.rect.x = self.x
 
     def move_down(self):
-        self.y -= self.game_settings.alien_speed_factor
+        self.moving_right = not self.moving_right
+        self.y += self.game_settings.alien_y_speed_factor
+        self.rect.y = self.y
