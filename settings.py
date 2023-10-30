@@ -14,7 +14,7 @@ class Settings():
         self.ship_height= 35
 
         #alien ships settings
-        self.alien_speed_factor = 1.5
+        self.alien_speed_factor = 1
         self.alien_width = 40
         self.alien_height = 35
         self.aliens_fraction_modifier = 0.5
