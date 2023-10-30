@@ -21,6 +21,7 @@ class Alien(Sprite):
 
         #Storing accurate alien position
         self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
 
     def blitme(self):
         #drawing an alien

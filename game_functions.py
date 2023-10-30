@@ -20,19 +20,25 @@ def aliens_per_row(game_settings):
     aliens_amount = int(available_space_x / (2 * game_settings.alien_width))
     return aliens_amount
 
-def create_alien(game_settings, screen, aliens, alien_number):
+def alien_rows_amount(game_settings):
+    usable_place = game_settings.screen_height * game_settings.aliens_fraction_modifier
+    rows_amount = int((usable_place - game_settings.alien_height) / (2 * game_settings.alien_height))
+    return rows_amount
+
+def create_alien(game_settings, screen, aliens, column_number, row_number):
     alien = Alien(game_settings, screen)
-    alien.x = game_settings.alien_width * (2 * alien_number + 1)
+    alien.x = game_settings.alien_width * (2 * column_number + 1)
+    alien.y = game_settings.alien_height * (2 * row_number + 1)
     alien.rect.x = alien.x
-    alien.rect.y = game_settings.alien_height
+    alien.rect.y = alien.y
     aliens.add(alien)
 
 def create_fleet(game_settings, screen, aliens):
     """creating an aliens fleet."""
     # neighbouring aliens interval is equal to single alien width
-    #creating first alien row
-    for alien_number in range(aliens_per_row(game_settings)):
-        create_alien(game_settings, screen, aliens, alien_number)
+    for row in range(alien_rows_amount(game_settings)):
+        for column in range(aliens_per_row(game_settings)):
+            create_alien(game_settings, screen, aliens, column, row)
 
 
 def check_keyup_events(event, ship):
