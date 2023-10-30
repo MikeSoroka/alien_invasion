@@ -18,6 +18,8 @@ class Settings():
         self.alien_width = 40
         self.alien_height = 35
         self.aliens_fraction_modifier = 0.5
+        self.aliens_distance_x = 1.5 * self.alien_width
+        self.aliens_distance_y = 1.5 * self.alien_height
 
         #bullet settings
         self.bullet_speed_factor = 1

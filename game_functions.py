@@ -16,19 +16,19 @@ def check_keydown_events(event, game_settings, screen, ship, bullets):
         sys.exit()
 
 def aliens_per_row(game_settings):
-    available_space_x = game_settings.screen_width - 2 * game_settings.alien_width
-    aliens_amount = int(available_space_x / (2 * game_settings.alien_width))
+    available_space_x = game_settings.screen_width - (game_settings.aliens_distance_x + game_settings.alien_width)
+    aliens_amount = int(available_space_x / (game_settings.aliens_distance_x + game_settings.alien_width))
     return aliens_amount
 
 def alien_rows_amount(game_settings):
     usable_place = game_settings.screen_height * game_settings.aliens_fraction_modifier
-    rows_amount = int((usable_place - game_settings.alien_height) / (2 * game_settings.alien_height))
+    rows_amount = int((usable_place - game_settings.alien_height) / (game_settings.aliens_distance_y + game_settings.alien_height))
     return rows_amount
 
 def create_alien(game_settings, screen, aliens, column_number, row_number):
     alien = Alien(game_settings, screen)
-    alien.x = game_settings.alien_width * (2 * column_number + 1)
-    alien.y = game_settings.alien_height * (2 * row_number + 1)
+    alien.x = game_settings.aliens_distance_x + column_number * (game_settings.alien_width + game_settings.aliens_distance_x)
+    alien.y = game_settings.aliens_distance_y + row_number * (game_settings.alien_height + game_settings.aliens_distance_y)
     alien.rect.x = alien.x
     alien.rect.y = alien.y
     aliens.add(alien)
